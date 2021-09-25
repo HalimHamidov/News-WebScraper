@@ -1,0 +1,7 @@
+https://towardsdatascience.com/how-to-run-postgresql-and-pgadmin-using-docker-3a6a8ae918b5
+
+https://realpython.com/beautiful-soup-web-scraper-python/
+
+https://github.com/realpython/materials/blob/7010df1c14/web-scraping-bs4/README.md
+
+C:/Users/halim/AppData/Local/Programs/Python/Python39/python.exe -m pip install -U autopep8
