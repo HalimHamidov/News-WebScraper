@@ -14,7 +14,7 @@ The basics of DevOps
 
 Create a script that parses the site and collects news
 
-Url: https://ir.thomsonreuters.com/rss-feeds
+Url: http://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml
 
 This script should be able:
 
