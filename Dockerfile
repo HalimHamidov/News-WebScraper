@@ -9,3 +9,21 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
 # Postgres configuration
 RUN apt-get update -y && apt-get install -my postgresql postgresql-contrib
 
+USER postgres
+
+RUN /etc/init.d/postgresql start &&\
+    psql --command "CREATE USER root WITH SUPERUSER PASSWORD 'root';" &&\
+    createdb -O root root
+
+EXPOSE 5432
+EXPOSE 5050
+
+# Add volumes
+VOLUME  ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql"]
+
+USER root
+RUN mkdir -p /scripts
+RUN mkdir -p /scripts/data
+RUN chown -R postgres:postgres /scripts/
+
+USER postgres
