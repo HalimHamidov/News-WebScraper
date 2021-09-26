@@ -6,9 +6,18 @@ https://github.com/realpython/materials/blob/7010df1c14/web-scraping-bs4/README.
 C:/Users/halim/AppData/Local/Programs/Python/Python39/python.exe -m pip install -U autopep8
 https://towardsdatascience.com/how-to-run-postgresql-and-pgadmin-using-docker-3a6a8ae918b5
 
-docker kill $(docker ps -q) && docker rm -f $(docker ps -a -q) && docker rmi -f $(docker images -a -q)
+***************************
+***************************
+***************************
+docker kill $(docker ps -q)
+
+docker rm -f $(docker ps -a -q) && docker rmi -f $(docker images -a -q)
+
 docker ps -a 
 docker-compose up
+***************************
+***************************
+***************************
 
 http://localhost:5050/
 admin@admin.com
@@ -54,3 +63,32 @@ https://medium.com/@darshipatel/web-scrapping-rss-feed-using-python-fb82370562b3
 
 https://colab.research.google.com/drive/1pVsIEfYwSnHLFbXh3XrnwO6T_h0vSD_S#scrollTo=vbbokRinWgNj
 
+
+
+# version: '3.8'
+# services:
+#   db:
+#     container_name: pg_container
+#     image: postgres
+#     restart: always
+#     environment:
+#       POSTGRES_USER: postgres
+#       POSTGRES_PASSWORD: postgres
+#       POSTGRES_DB: news_db
+#     ports:
+#       - "5432:5432"
+#   pgadmin:
+#     container_name: pgadmin4_container
+#     image: dpage/pgadmin4
+#     restart: always
+#     environment:
+#       PGADMIN_DEFAULT_EMAIL: admin@admin.com
+#       PGADMIN_DEFAULT_PASSWORD: root
+#     ports:
+#       - "5050:80"
+
+# docker exec -ti bbc bash menu.sh
+
+lsof -i :5432
+
+kill -9 61028

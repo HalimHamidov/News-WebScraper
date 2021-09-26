@@ -1,30 +1,30 @@
 #!/bin/bash
 
 PS3='Select by numbers: '
-options=("Run PostgreSQL db" "Stop PostgreSQL db" "Create database and tables" "Get info from News-Feed" "Save info to PostgreSQL" "Export data to CSV" "Cron hourly" "Quit")
+options=("Run PostgreSQL db" "Stop PostgreSQL db" "Create database and tables" "Get info from News-Feed" "Save info to PostgreSQL" "Export data to CSV format file" "Cron daily" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
-        "Run PostgreSQL")
+        "Run PostgreSQL db")
             /etc/init.d/postgresql start
             psql --command "ALTER DB USER  WITH PASSWORD '$POSTGRES_PASSWORD';"
             ;;
-        "Stop PostgreSQL")
+        "Stop PostgreSQL db")
             /etc/init.d/postgresql stop
             ;;
-        "Create schema")
+        "Create database and tables")
             psql -a -f create_db.sql
             ;;
-        "Get some data from News-Feed site")
+        "Get info from News-Feed")
             python3 scraper.py
             ;;
-        "Save data to PostgreSQL")
+        "Save info to PostgreSQL")
             python3 save_to_db.py
             ;;
 	    "Export data to CSV format file")
             python3 out_from_db.py
             ;;
-        "Cron hourly")
+        "Cron daily")
             bash cron.sh
             ;;
         "Quit")

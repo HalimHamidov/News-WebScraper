@@ -1,21 +1,30 @@
-version: '3.8'
+version: '3'
 services:
-  db:
-    container_name: pg_container
-    image: postgres
-    restart: always
+  dev:
+    build: .
+    container_name: bbc
+    tty: true
+    stdin_open: true
     environment:
-      POSTGRES_USER: root
-      POSTGRES_PASSWORD: root
-      POSTGRES_DB: news_db
+      - POSTGRES_PASSWORD=postgres
     ports:
-      - "5432:5432"
-  pgadmin:
-    container_name: pgadmin4_container
+      - 5432:5432
+    networks:
+      - reut
+  adminer:
+    links:
+      - dev:dev
     image: dpage/pgadmin4
-    restart: always
+    container_name: reuters_web
     environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: root
+      PGADMIN_DEFAULT_EMAIL: example@example.com
+      PGADMIN_DEFAULT_PASSWORD: example
     ports:
-      - "5050:80"
+      - 8080:8080
+    networks:
+      - reut
+    restart: unless-stopped
+
+networks:
+  reut:
+    driver: bridge
