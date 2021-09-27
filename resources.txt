@@ -18,7 +18,9 @@ docker-compose up
 ***************************
 ***************************
 ***************************
-
+    links: 
+      - db:db
+      
 http://localhost:5050/
 admin@admin.com
 root

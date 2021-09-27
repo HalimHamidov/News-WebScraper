@@ -1,7 +1,7 @@
 #write out current crontab
-#crontab -l > mycron
+#crontab -l > cron_news
 #Hourly
-echo "00 * * * * python get_data.py;python save_data.py" >> mycron
+echo "* 00 * * * python get_data.py;python save_data.py" >> cron_news
 #install new cron file
-crontab mycron
-rm mycron
+crontab cron_news
+rm cron_news

@@ -7,7 +7,7 @@ do
     case $opt in
         "Run PostgreSQL db")
             /etc/init.d/postgresql start
-            psql --command "ALTER DB USER  WITH PASSWORD '$POSTGRES_PASSWORD';"
+            psql --command "ALTER DB postgres WITH PASSWORD '$POSTGRES_PASSWORD';"
             ;;
         "Stop PostgreSQL db")
             /etc/init.d/postgresql stop

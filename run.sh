@@ -1,2 +1,2 @@
-docker-compose up --build
-docker exec -it bbc bash menu.sh
+docker-compose up -d --build
+docker exec -ti pg_container bash menu.sh
