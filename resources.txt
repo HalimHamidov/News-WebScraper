@@ -94,3 +94,9 @@ https://colab.research.google.com/drive/1pVsIEfYwSnHLFbXh3XrnwO6T_h0vSD_S#scroll
 lsof -i :5432
 
 kill -9 61028
+
+https://www.w3resource.com/pandas/dataframe/dataframe-at.php
+
+https://stackoverflow.com/questions/5500332/cant-connect-the-postgresql-with-psycopg2
+
+http://breesbrees12.blogspot.com/2015/04/python-psycopg2-attributeerror-object.html

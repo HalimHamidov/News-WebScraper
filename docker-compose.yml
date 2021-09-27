@@ -16,6 +16,8 @@ services:
     networks:
       - reut
   pgadmin:
+    links: 
+      - db:db
     container_name: pgadmin4_container
     image: dpage/pgadmin4
     restart: always
@@ -26,6 +28,7 @@ services:
       - "5050:80"
     networks:
       - reut
+      
 networks:
   reut:
     driver: bridge

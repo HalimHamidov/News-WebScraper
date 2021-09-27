@@ -7,7 +7,7 @@ do
     case $opt in
         "Run PostgreSQL db")
             /etc/init.d/postgresql start
-            psql --command "ALTER DB postgres WITH PASSWORD '$POSTGRES_PASSWORD';"
+            psql --command "ALTER user postgres WITH PASSWORD '$POSTGRES_PASSWORD';"
             ;;
         "Stop PostgreSQL db")
             /etc/init.d/postgresql stop
@@ -22,7 +22,7 @@ do
             python3 save_to_db.py
             ;;
 	    "Export data to CSV format file")
-            python3 out_from_db.py
+            python3 save_to_csv.py
             ;;
         "Cron daily")
             bash cron.sh
