@@ -2,7 +2,8 @@ FROM ubuntu
 
 # Meta-packages and Python configuration
 RUN apt-get update -y && apt-get install -y build-essential python3 python3-dev python3-pip 
-RUN pip3 install lxml pandas psycopg2-binary requests beautifulsoup4 bs4 SQLAlchemy future DateTime numpy traceback2  pandas-compat
+COPY requirements.txt /tmp/
+RUN pip3 install --requirement /tmp/requirements.txt
 
 # Debian boot parameter settings and installing The Time Zone Database
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
@@ -35,7 +36,6 @@ USER postgres
 
 COPY src/* /src/
 
-COPY /var/src/data/* /src/data/ 
 RUN mkdir -p /var/run/postgresql/12-main.pg_stat_tmp
 RUN chown postgres:postgres /var/run/postgresql/12-main.pg_stat_tmp -R
 RUN ln -s /tmp/.s.PGSQL.5432 /var/run/postgresql/.s.PGSQL.5432

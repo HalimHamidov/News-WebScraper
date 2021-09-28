@@ -1,0 +1,12 @@
+lxml 
+pandas
+psycopg2-binary
+requests 
+beautifulsoup4 
+bs4 
+SQLAlchemy 
+future 
+DateTime 
+numpy 
+traceback2  
+pandas-compat

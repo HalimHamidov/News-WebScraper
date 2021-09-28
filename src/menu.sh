@@ -22,7 +22,7 @@ do
             python3 save_to_db.py
             ;;
 	    "Export data to CSV format file")
-            python3 save_to_csv.py
+            python3 save_to_csv.py 
             ;;
         "Cron daily")
             bash cron.sh

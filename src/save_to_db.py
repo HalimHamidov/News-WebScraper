@@ -121,13 +121,18 @@ def copy_from_stringio(conn, df, table):
     and use copy_from() to copy it to the table
     """
     # save dataframe to an in memory buffer
-    buffer = StringIO()
-    df.to_csv(buffer, index_label='id', header=False)
-    buffer.seek(0)
-    
+    # buffer = StringIO()
+    # df.to_csv(buffer, index_label='id', header=False)
+    # buffer.seek(0)
+    #     tmp_df = "data/tmp_dataframe.csv"
+#     df.to_csv(tmp_df, index_label='id', header=False)
+#     f = open(tmp_df, 'r')
+
+    tmp_file = "data/BBCnews.csv"
+    f = open(tmp_file, 'r')
     cursor = conn.cursor()
     try:
-        cursor.copy_from(buffer, table, sep=",")
+        cursor.copy_from(f, table, sep=",")
         conn.commit()
     except (Exception, psycopg2.DatabaseError) as error:
         
