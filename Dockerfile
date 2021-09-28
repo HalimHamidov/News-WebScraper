@@ -1,12 +1,15 @@
 FROM ubuntu
 
 # Meta-packages and Python configuration
-RUN apt-get update -y && apt-get install -y build-essential python3 python3-dev python3-pip 
+RUN apt-get update -y && apt-get install -y build-essential python3 python3-dev python3-pip python3-distutils 
 COPY requirements.txt /tmp/
 RUN pip3 install --requirement /tmp/requirements.txt
 
 # Debian boot parameter settings and installing The Time Zone Database
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
+
+# Mongodb configuration
+RUN apt-get update -y && apt-get install -my mongodb
 
 # Postgres configuration
 RUN apt-get update -y && apt-get install -my postgresql postgresql-contrib
@@ -39,6 +42,6 @@ COPY src/* /src/
 RUN mkdir -p /var/run/postgresql/12-main.pg_stat_tmp
 RUN chown postgres:postgres /var/run/postgresql/12-main.pg_stat_tmp -R
 RUN ln -s /tmp/.s.PGSQL.5432 /var/run/postgresql/.s.PGSQL.5432
-#CMD [ "/var/lib/postgresql/12/main", "-c", "config_file=/etc/postgresql/12/main/postgresql.conf"]
+
 WORKDIR "/src"
 CMD ["bash","menu.sh"]

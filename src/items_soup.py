@@ -17,11 +17,11 @@ news_items = []
 #scarring HTML tags such as Title, Description, Links and Publication date
 for item in items:
     news_item = {}
-    news_item['title'] = item.title.text
-    news_item['description'] = item.description.text
-    news_item['pubDate'] = item.pubDate.text
-    news_item['link'] = item.link.text
+    news_item['titled'] = item.title.text
+    news_item['descriptiond'] = item.description.text
+    news_item['pubdated'] = item.pubDate.text
+    news_item['linkd'] = item.link.text
     news_items.append(news_item)
 
 #import pandas to create dataframe for db and CSV
-df = pd.DataFrame(news_items,columns=['title','description','pubDate','link'])
+df = pd.DataFrame(news_items,columns=['titled','descriptiond','pubdated','linkd'])

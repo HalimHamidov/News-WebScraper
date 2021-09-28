@@ -4,9 +4,9 @@ psycopg2-binary
 requests 
 beautifulsoup4 
 bs4 
-SQLAlchemy 
+SQLAlchemy
+sqlalchemy_helpers
+orm
 future 
-DateTime 
-numpy 
-traceback2  
-pandas-compat
+DateTime
+pymongo

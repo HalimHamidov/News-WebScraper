@@ -4,8 +4,9 @@ CREATE DATABASE news_db OWNER postgres;
 
 CREATE TABLE news_items_dt (
     id SERIAL PRIMARY KEY,
-    title TEXT,
-    description TEXT,
-    link TEXT,
-    pubDate TEXT
+    titled TEXT,
+    descriptiond TEXT,
+    pubdated TEXT,
+    linkd TEXT
+
 )

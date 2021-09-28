@@ -11,10 +11,11 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: news_db
+      POSTGRES_HOST: localhost
     ports:
       - "5432:5432"
-    networks:
-      - reut
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
     
   pgadmin:
     links: 
@@ -27,9 +28,21 @@ services:
       PGADMIN_DEFAULT_PASSWORD: root
     ports:
       - "5050:80"
-    networks:
-      - reut
+    volumes:
+      - pgadmin_data:/root/.pgadmin
+  
+  dbMongo:
+    image: mongo
+    restart: always
+    ports:
+        - 27017:27017
+    environment:
+        MONGO_INITDB_ROOT_USERNAME: admin
+        MONGO_INITDB_ROOT_PASSWORD: admin
+    volumes:
+      - mongodb_data:/data/db
+volumes:
+  postgres_data:
+  pgadmin_data:
+  mongodb_data:
 
-networks:
-  reut:
-    driver: bridge

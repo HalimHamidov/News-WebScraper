@@ -1,3 +1,3 @@
-from connect import *
+from items_soup import *
 
-print(df.head())
+print(df)

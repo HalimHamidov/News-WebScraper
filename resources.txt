@@ -11,7 +11,9 @@ https://towardsdatascience.com/how-to-run-postgresql-and-pgadmin-using-docker-3a
 ***************************
 docker kill $(docker ps -q)
 
-docker rm -f $(docker ps -a -q) && docker rmi -f $(docker images -a -q)
+docker rm -f $(docker ps -a -q) && docker rmi -f $(docker images -a -q) && docker volume rm $(docker volume ls -q)
+
+bash run.sh 
 
 docker ps -a 
 docker-compose up
@@ -108,3 +110,328 @@ postgres cheetsheet
 https://gist.github.com/Kartones/dd3ff5ec5ea238d4c546
 
 cp /src/data/BBCnews.csv /goinfre/apearl/reuters/News-WebScraper/src/data/BBCNews.csv
+
+
+888888888888888888888888888888888888888888888888888888888888
+from sqlalchemy import create_engine
+engine = create_engine('postgresql://postgres:postgres@localhost:5432/news_db')
+df.to_sql('news_db_dt', engine)
+
+
+il-d3% docker exec -ti pg_container psql
+psql (12.8 (Ubuntu 12.8-0ubuntu0.20.04.1))
+Type "help" for help.
+
+postgres=# \l
+                              List of databases
+   Name    |  Owner   | Encoding | Collate |  Ctype  |   Access privileges   
+-----------+----------+----------+---------+---------+-----------------------
+ apearl    | apearl   | UTF8     | C.UTF-8 | C.UTF-8 | 
+ news_db   | postgres | UTF8     | C.UTF-8 | C.UTF-8 | 
+ postgres  | postgres | UTF8     | C.UTF-8 | C.UTF-8 | 
+ template0 | postgres | UTF8     | C.UTF-8 | C.UTF-8 | =c/postgres          +
+           |          |          |         |         | postgres=CTc/postgres
+ template1 | postgres | UTF8     | C.UTF-8 | C.UTF-8 | =c/postgres          +
+           |          |          |         |         | postgres=CTc/postgres
+(5 rows)
+
+postgres=# \c news_db
+You are now connected to database "news_db" as user "postgres".
+news_db=# \dt
+             List of relations
+ Schema |     Name      | Type  |  Owner   
+--------+---------------+-------+----------
+ public | news_db_dt    | table | postgres
+ public | news_items_dt | table | postgres
+(2 rows)
+
+news_db=# select * from news_db_dt
+news_db-# 
+888888888888888888888888888888888888888888888888888888888888
+
+docker exec -ti pg_container psql
+
+https://www.datacamp.com/community/tutorials/10-command-line-utilities-postgresql?utm_source=adwords_ppc&utm_campaignid=1455363063&utm_adgroupid=65083631748&utm_device=c&utm_keyword=&utm_matchtype=b&utm_network=g&utm_adpostion=&utm_creative=278443377095&utm_targetid=aud-299261629574:dsa-429603003980&utm_loc_interest_ms=&utm_loc_physical_ms=9047026&gclid=CjwKCAjw-sqKBhBjEiwAVaQ9a2TyFR82UJuzKW4hodD1USCMPd762Abrfac5y8LZrwBgcqTWv3hGVxoC9bwQAvD_BwE
+
+-------LOOK HERE------------
+
+888888888888888888888888888888888888888888888888888888888888
+Successfully built 9f4a4c455611
+Successfully tagged postgres:latest
+Recreating pg_container ... done
+Recreating pgadmin4_container ... done
+1) Run PostgreSQL db               5) Save info to PostgreSQL
+2) Stop PostgreSQL db              6) Export data to CSV format file
+3) Create database and tables      7) Cron daily
+4) Get info from News-Feed         8) Quit
+Select by numbers: 1
+ * Starting PostgreSQL 12 database server                                                                  [ OK ] 
+ALTER ROLE
+Select by numbers: 3
+CREATE DATABASE news_db OWNER postgres;
+psql:create_db.sql:1: ERROR:  database "news_db" already exists
+\connect news_db;
+You are now connected to database "news_db" as user "postgres".
+CREATE TABLE news_items_dt (
+    id SERIAL PRIMARY KEY,
+    title TEXT,
+    description TEXT,
+    link TEXT,
+    pubDate TEXT
+)
+psql:create_db.sql:11: ERROR:  relation "news_items_dt" already exists
+Select by numbers: 4
+                                               title                                        description                        pubDate                                               link
+0  Afghanistan: Al-Qaeda could threaten US in a y...  Top General Mark Milley says the Afghan Taliba...  Tue, 28 Sep 2021 16:26:11 GMT  https://www.bbc.co.uk/news/world-us-canada-587...
+1  Capitol Gazette shooting: 'You cannot kill the...  Prosecutors reminded a court that Jarrod Ramos...  Tue, 28 Sep 2021 16:40:29 GMT  https://www.bbc.co.uk/news/world-us-canada-587...
+2     R. Kelly found guilty in sex trafficking trial  After decades of allegations, the singer is co...  Tue, 28 Sep 2021 10:47:33 GMT  https://www.bbc.co.uk/news/entertainment-arts-...
+3  Most trapped Canadian miners rescued after two...  Thirty miners are rescued after climbing a dis...  Tue, 28 Sep 2021 14:26:44 GMT  https://www.bbc.co.uk/news/world-us-canada-587...
+4  Covid-19: President Joe Biden receives Pfizer ...  The US President and other Americans over 65 a...  Mon, 27 Sep 2021 19:42:53 GMT  https://www.bbc.co.uk/news/world-us-canada-587...
+Select by numbers: 5
+Select by numbers: 6
+Select by numbers: 7
+no crontab for postgres
+00 * * * * python3 scraper.py;python3 save_to_csv.py
+Select by numbers: 7
+00 * * * * python3 scraper.py;python3 save_to_csv.py
+00 * * * * python3 scraper.py;python3 save_to_csv.py
+Select by numbers: % 
+888888888888888888888888888888888888888888888888888888888888
+
+999999999999999999999999999999999999999999999999999999999
+postgres=# \l 
+                              List of databases
+   Name    |  Owner   | Encoding | Collate |  Ctype  |   Access privileges   
+-----------+----------+----------+---------+---------+-----------------------
+ apearl    | apearl   | UTF8     | C.UTF-8 | C.UTF-8 | 
+ news_db   | postgres | UTF8     | C.UTF-8 | C.UTF-8 | 
+ postgres  | postgres | UTF8     | C.UTF-8 | C.UTF-8 | 
+ template0 | postgres | UTF8     | C.UTF-8 | C.UTF-8 | =c/postgres          +
+           |          |          |         |         | postgres=CTc/postgres
+ template1 | postgres | UTF8     | C.UTF-8 | C.UTF-8 | =c/postgres          +
+           |          |          |         |         | postgres=CTc/postgres
+(5 rows)
+
+postgres=# \c news_db
+You are now connected to database "news_db" as user "postgres".
+news_db=# \dt+
+                        List of relations
+ Schema |     Name      | Type  |  Owner   | Size  | Description 
+--------+---------------+-------+----------+-------+-------------
+ public | news_items_dt | table | postgres | 56 kB | 
+(1 row)
+
+news_db=# select * news_items_dt
+news_db-# \d news_items_dt
+                               Table "public.news_items_dt"
+    Column    |  Type   | Collation | Nullable |                  Default                  
+--------------+---------+-----------+----------+-------------------------------------------
+ id           | integer |           | not null | nextval('news_items_dt_id_seq'::regclass)
+ titled       | text    |           |          | 
+ descriptiond | text    |           |          | 
+ pubdated     | text    |           |          | 
+ linkd        | text    |           |          | 
+Indexes:
+    "news_items_dt_pkey" PRIMARY KEY, btree (id)
+
+news_db-# SELECT version();
+ERROR:  syntax error at or near "news_items_dt"
+LINE 1: select * news_items_dt
+                 ^
+news_db=# select * from news_items_dt limit 10
+news_db-# \e
+999999999999999999999999999999999999999999999999999999999
+
+
+        "Stop postgresql db")
+            /etc/init.d/postgresql stop
+            ;;
+
+junk-info
+# import os
+
+# Establishing the connection
+# conn = psycopg2.connect(
+#    database="news_db",
+#    user="postgres", 
+#    password="postgres"
+# )
+
+# sql.write_frame(df, 'news_items_dt' , conn, flavor='postgresql')
+# # conn = psycopg2.connect('dbname=news_db user=postgres password=postgres host=/tmp/')
+# #Setting auto commit false
+# conn.autocommit = True
+
+# #Creating a cursor object using the cursor() method
+# cursor = conn.cursor()
+
+
+
+# if len(df) > 0:
+#     df_columns = list(df)
+#     # create (col1,col2,...)
+#     columns = ','.join(df_columns)
+
+#     # create VALUES('%s', '%s",...) one '%s' per column
+#     values = "VALUES({})".format(','.join('%s' for _ in df_columns)) 
+
+#     #create INSERT INTO table (columns) VALUES('%s',...)
+#     insert_stmt = "INSERT INTO {} ({}) {}".format('news_items_dt',columns,values)
+
+#     cur = conn.cursor()
+#     psycopg2.extras.execute_batch(cur, insert_stmt, df.values)
+#     conn.commit()
+#     cur.close()
+#    #  title TEXT,
+#    #  description TEXT,
+#    #  link TEXT,
+#    #  pubDate TEXT
+
+# # Commit your changes in the database
+# # conn.commit()
+# print("Records inserted........")
+
+# # Closing the connection
+# # conn.close()
+
+
+
+# engine = create_engine('postgresql://postgres:postgres@localhost:5432/news_db')
+
+# df.to_sql("news_items_dt", conn)
+# import sql  # the patched version (file is named sql.py)
+# sql.write_frame(df, 'news_items_dt', conn, flavor='postgresql')
+
+# def execute_values(conn, df, table):
+#     """
+#     Using psycopg2.extras.execute_values() to insert the dataframe
+#     """
+#     # Create a list of tupples from the dataframe values
+#     tuples = [tuple(x) for x in df.to_numpy()]
+#     # Comma-separated dataframe columns
+#     cols = ','.join(list(df.columns))
+#     # SQL quert to execute
+#     query  = "INSERT INTO %s(%s) VALUES %%s" % (table, cols)
+#     cursor = conn.cursor()
+#     try:
+#         psycopg2.extras.execute_values(cursor, query, tuples)
+#         conn.commit()
+#     except (Exception, psycopg2.DatabaseError) as error:
+#         print("Error: %s" % error)
+#         conn.rollback()
+#         cursor.close()
+#         return 1
+#     print("execute_values() done")
+#     cursor.close()
+
+# execute_values(conn, df, 'news_items_dt')
+# conn.close()
+
+
+# def copy_from_file(conn, df, table):
+#     """
+#     Here we are going save the dataframe on disk as 
+#     a csv file, load the csv file  
+#     and use copy_from() to copy it to the table
+#     """
+#     # Save the dataframe to disk
+#     tmp_df = "data/tmp_dataframe.csv"
+#     df.to_csv(tmp_df, index_label='id', header=False)
+#     f = open(tmp_df, 'r')
+#     cursor = conn.cursor()
+#     try:
+#         cursor.copy_from(f, table, sep=",")
+#         conn.commit()
+#     except (Exception, psycopg2.DatabaseError) as error:
+#         os.remove(tmp_df)
+#         print("Error: %s" % error)
+#         conn.rollback()
+#         cursor.close()
+#         return 1
+#     print("copy_from_file() done")
+#     cursor.close()
+#     os.remove(tmp_df)
+    
+# #-----------------------------------------------
+# # Main code
+# #-----------------------------------------------
+
+# copy_from_file(conn, df, 'news_items_dt') # copy the dataframe to SQL
+# conn.close() # close the connection
+
+# from io import StringIO
+
+# def copy_from_stringio(conn, df, table):
+#     """
+#     Here we are going save the dataframe in memory 
+#     and use copy_from() to copy it to the table
+#     """
+#     # save dataframe to an in memory buffer
+#     # buffer = StringIO()
+#     # df.to_csv(buffer, index_label='id', header=False)
+#     # buffer.seek(0)
+#     #     tmp_df = "data/tmp_dataframe.csv"
+# #     df.to_csv(tmp_df, index_label='id', header=False)
+# #     f = open(tmp_df, 'r')
+
+#     tmp_file = "data/BBCnews.csv"
+#     f = open(tmp_file, 'r')
+#     cursor = conn.cursor()
+#     try:
+#         cursor.copy_from(f, table, sep=",")
+#         conn.commit()
+#     except (Exception, psycopg2.DatabaseError) as error:
+        
+#         print("Error: %s" % error)
+#         conn.rollback()
+#         cursor.close()
+#         return 1
+#     print("copy_from_stringio() done")
+#     cursor.close()
+    
+#-----------------------------------------------
+# Main code
+#-----------------------------------------------
+# copy_from_stringio(conn, df, 'news_items_dt') # copy the dataframe to SQL
+# conn.close() # close the connection
+
+
+# from sqlalchemy import create_engine
+
+# param_dic = {
+#     "host"      : "localhost",
+#     "database"  : "news_db",
+#     "user"      : "postgres",
+#     "password"  : "postgres"
+# }
+
+# connection = "postgresql+psycopg2://%s:%s@%s:5432/%s" % (
+#     param_dic['user'],
+#     param_dic['password'],
+#     param_dic['host'],
+#     param_dic['database']
+# )
+# conn = psycopg2.connect(
+#    database="news_db",
+#    user="postgres", 
+#    password="postgres"
+# )
+# def to_alchemy(df):
+#     """
+#     Using a dummy table to test this call library
+#     """
+#     engine = create_engine(connection)
+#     df.to_sql(
+#         'news_items_dt', 
+#         con=engine, 
+#         index=False, 
+#         if_exists='replace'
+#     )
+#     print("to_sql() done (sqlalchemy)")
+# to_alchemy(df)
+# connection.close() 
+
+# from sqlalchemy import create_engine
+# engine = create_engine('postgresql://postgres:postgres@localhost:5432/news_db')
+# df.to_sql('news_db_dt', engine)
+
