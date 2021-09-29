@@ -11,6 +11,9 @@ https://towardsdatascience.com/how-to-run-postgresql-and-pgadmin-using-docker-3a
 ***************************
 docker kill $(docker ps -q)
 
+docker-compose down -v
+docker rmi -f $(docker images -a -q)
+
 docker rm -f $(docker ps -a -q) && docker rmi -f $(docker images -a -q) && docker volume rm $(docker volume ls -q)
 
 bash run.sh 
@@ -435,12 +438,16 @@ junk-info
 # engine = create_engine('postgresql://postgres:postgres@localhost:5432/news_db')
 # df.to_sql('news_db_dt', engine)
 
+cat -v init_db.js
+tr -d '\r' < init_db.js >init_db1.js
 
-additional taks to be done:
 
+## additional taks to be done:
+
++ refactor cron service inside - done!
+
+* update retrieving data for a specific date
 * use collected urls to get body of news
 * check postgres issue
 * Save collected data in MongoDB
-* update retrieving data for a specific date
-* refactor cron service inside
 * remove resources.txt 

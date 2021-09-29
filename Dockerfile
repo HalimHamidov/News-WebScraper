@@ -1,12 +1,21 @@
 FROM ubuntu
 
 # Meta-packages and Python configuration
-RUN apt-get update -y && apt-get install -y build-essential python3 python3-dev python3-pip python3-distutils 
+RUN apt-get update -y && apt-get install -y build-essential python3 python3-dev python3-pip 
 COPY requirements.txt /tmp/
+# RUN pip3 install --upgrade pip3
 RUN pip3 install --requirement /tmp/requirements.txt
 
 # Debian boot parameter settings and installing The Time Zone Database
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y tzdata
+
+RUN apt full-upgrade -y && apt install psmisc -y
+# RUN killall apt-get 
+RUN apt-get update && apt-get install -y cron
+USER root
+
+ADD src/crons/entrypoint.sh /entrypoint.sh
+RUN chmod 755 /entrypoint.sh
 
 # Mongodb configuration
 RUN apt-get update -y && apt-get install -my mongodb
@@ -42,6 +51,12 @@ COPY src/* /src/
 RUN mkdir -p /var/run/postgresql/12-main.pg_stat_tmp
 RUN chown postgres:postgres /var/run/postgresql/12-main.pg_stat_tmp -R
 # RUN ln -s /tmp/.s.PGSQL.5432 /var/run/postgresql/.s.PGSQL.5432
+# Install cron
+# USER root
+# RUN chmod +x  /entrypoint.sh
 
 WORKDIR "/src"
+
+USER postgres
 CMD ["bash","menu.sh"]
+# ENTRYPOINT [ "/entrypoint.sh" ]

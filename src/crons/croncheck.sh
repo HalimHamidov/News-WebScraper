@@ -1,8 +1,10 @@
+#!/bin/bash
 #install new cron file
 #Hourly
-crontab -l ; echo "0 *   * * *   root    python3 scraper.py;python3 save_to_db.py" >> cronjob
-crontab cronjob
 crontab -l
+# echo "0 *   * * *   root    python3 scraper.py;python3 save_to_db.py" >>cronjob
+# crontab cronjob
+# crontab -l
 
 # /etc/crontab: system-wide crontab
 # Unlike any other crontab you don't have to run the `crontab'
