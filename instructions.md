@@ -64,18 +64,25 @@ $: cd src/data/
 $: ls
 > BBCnews.csv
 ```
-By typing 6 we run crontab job 
+By typing 6 we run crontab checking  
 ```
 no crontab for postgres
-0 *   * * *   root    python3 scraper.py;python3 save_to_db.py
+Select by numbers: 6
+0 * * * * python3 /src/save_todb.py 2>&1
+# This extra line makes it a valid cron
 ```
-
-By typing 7 we quit the menu app.
+By typing 7 we start cron schedule 
 ```
 Select by numbers: 7
+Start cron schedule
+```
+
+By typing 8 we quit the menu app.
+```
+Select by numbers: 8
 > $:
 ```
 
 Good luck towards datascience!
 
-Keep learning!
+Keep learning by coding!
