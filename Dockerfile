@@ -41,7 +41,7 @@ COPY src/* /src/
 
 RUN mkdir -p /var/run/postgresql/12-main.pg_stat_tmp
 RUN chown postgres:postgres /var/run/postgresql/12-main.pg_stat_tmp -R
-RUN ln -s /tmp/.s.PGSQL.5432 /var/run/postgresql/.s.PGSQL.5432
+# RUN ln -s /tmp/.s.PGSQL.5432 /var/run/postgresql/.s.PGSQL.5432
 
 WORKDIR "/src"
 CMD ["bash","menu.sh"]

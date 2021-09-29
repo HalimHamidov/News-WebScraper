@@ -1,7 +1,8 @@
 version: '3.8'
 services:
   db:
-    build: .
+    build:
+      context: .
     container_name: pg_container
     tty: true
     stdin_open: true
