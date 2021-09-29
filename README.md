@@ -54,7 +54,7 @@ Additional task:
 
 Create service in docker-compose with cron service inside. Cron task should start Scraper hourly and add only new news in database.
 
-Also you should create instructions.md so user could be able to install and run everything that you created
+Also you should create [instructions.md](instructions.md) so user could be able to install and run everything that you created
 
 It is normal if you don't know some of the things but get a tutorial/book and learn it on the flight.
 

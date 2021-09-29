@@ -435,3 +435,12 @@ junk-info
 # engine = create_engine('postgresql://postgres:postgres@localhost:5432/news_db')
 # df.to_sql('news_db_dt', engine)
 
+
+additional taks to be done:
+
+* use collected urls to get body of news
+* check postgres issue
+* Save collected data in MongoDB
+* update retrieving data for a specific date
+* refactor cron service inside
+* remove resources.txt 

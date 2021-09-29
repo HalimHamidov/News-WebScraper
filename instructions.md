@@ -55,7 +55,7 @@ By typing 4 we save data to database
 ```
 Select by numbers: 4
 ```
-By typing 5 we save data to csv file in ubuntu filesystem, which we can retrieve by running command `bash tun.sh` then we can check the folder src/data for csv file
+By typing 5 we save data to csv file in ubuntu filesystem, which we can retrieve to host by running command `bash tun.sh` then we can check the folder src/data for csv file
 ```
 Select by numbers: 5
 ```
