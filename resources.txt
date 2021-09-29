@@ -12,7 +12,8 @@ https://towardsdatascience.com/how-to-run-postgresql-and-pgadmin-using-docker-3a
 docker kill $(docker ps -q)
 
 docker-compose down -v
-docker rmi -f $(docker images -a -q)
+docker rmi -f $(docker images -a -q) 
+docker volume rm $(docker volume ls -q)
 
 docker rm -f $(docker ps -a -q) && docker rmi -f $(docker images -a -q) && docker volume rm $(docker volume ls -q)
 
@@ -438,9 +439,20 @@ junk-info
 # engine = create_engine('postgresql://postgres:postgres@localhost:5432/news_db')
 # df.to_sql('news_db_dt', engine)
 
+
 cat -v init_db.js
 tr -d '\r' < init_db.js >init_db1.js
 
+Stopping pgadmin4_container        ... done
+Stopping news-webscraper_dbMongo_1 ... done
+Stopping pg_container              ... done
+Removing pgadmin4_container        ... done
+Removing news-webscraper_dbMongo_1 ... done
+Removing pg_container              ... done
+Removing network news-webscraper_default
+Removing volume news-webscraper_postgres_data
+Removing volume news-webscraper_pgadmin_data
+Removing volume news-webscraper_mongodb_data
 
 ## additional taks to be done:
 
@@ -449,5 +461,8 @@ tr -d '\r' < init_db.js >init_db1.js
 * update retrieving data for a specific date
 * use collected urls to get body of news
 * check postgres issue
+* check excess volumes 
 * Save collected data in MongoDB
 * remove resources.txt 
+
+

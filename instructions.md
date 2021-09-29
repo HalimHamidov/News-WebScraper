@@ -64,14 +64,14 @@ $: cd src/data/
 $: ls
 > BBCnews.csv
 ```
-By typing 6 we run crontab checking  
+By typing 6 we run crontab checking . If there is no crontab , we should click on option 7 and again check for cron by pressing 6 again.
 ```
 no crontab for postgres
 Select by numbers: 6
 0 * * * * python3 /src/save_todb.py 2>&1
 # This extra line makes it a valid cron
 ```
-By typing 7 we start cron schedule 
+By typing 7 we start cron schedule. Don't care if it shows permission deny for command cron
 ```
 Select by numbers: 7
 Start cron schedule

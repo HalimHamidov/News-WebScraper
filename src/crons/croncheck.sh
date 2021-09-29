@@ -1,6 +1,6 @@
 #!/bin/bash
 #install new cron file
-#Hourly
+#Lists the user's crontab file.
 crontab -l
 # echo "0 *   * * *   root    python3 scraper.py;python3 save_to_db.py" >>cronjob
 # crontab cronjob
