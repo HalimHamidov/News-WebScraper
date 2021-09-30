@@ -68,7 +68,7 @@ By typing 6 we run crontab checking . If there is no crontab , we should click o
 ```
 no crontab for postgres
 Select by numbers: 6
-0 * * * * python3 /src/save_todb.py 2>&1
+0 * * * * python3 /src/save_to_db.py 2>&1
 # This extra line makes it a valid cron
 ```
 By typing 7 we start cron schedule. Don't care if it shows permission deny for command cron
