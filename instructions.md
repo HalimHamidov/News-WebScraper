@@ -83,6 +83,22 @@ Select by numbers: 8
 > $:
 ```
 
+!Important
+
+Be aware which OS env you run this application:
+
+If you run on Mac or Ubuntu directly, there may be no problem.
+
+But on Windows, sometimes such error pops out:
+
+`Literal carriage return. Run script through tr -d '\r' .shellcheck(SC1017)`
+
+That's why you should run this command on each file separately and replace accordingly.
+
+`tr -d '\r' < entrypoint.sh > entrypoint1.sh`
+
+rerun the app!
+
 Good luck towards datascience!
 
 Keep learning by coding!
